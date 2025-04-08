@@ -138,13 +138,57 @@ Dit bestand berekend de waarden van $\alpha$ en $\eta$.
 
 text
 
+### analytical_alpha_error():
+
+Berekent de functie waarmee de fout op alpha berekend wordt.
+
+Returns:
+    callable: Error function for alpha.
+
 ### alytical_alpha(I_1_in: float, I_1_out: float, I_2_in: float, I_2_out: float, d: float) -> float:
 
-text
+Berekent de extinctiecoëfficiënt op een bepaalde golflengte.
+
+Args:
+    I_1_in (float): Ingoing intensity of the first measurement.
+    I_1_out (float): Outgoing intensity of the first measurement.
+    I_2_in (float): Ingoing intensity of the second measurement.
+    I_2_out (float): Outgoing intensity of the second measurement.
+    d (float): Distance traveled by radiation.
+    I_1_in_err (float): 
+    I_1_out_err (float):
+    I_2_in_err (float):
+    I_2_out_err (float):
+    d_err (float):
+
+Returns:
+    float: The emission coefficient on a given wavelength.
+    float: Error on the emission coefficient.
+
+### analytical_eta_error():
+
+Berekent de functie waarmee de fout op eta berekend wordt.
+
+Returns:
+    callable: Error function for eta.
 
 ### analytical_eta(I_1_in: float, I_1_out: float, I_2_in: float, I_2_out: float, d: float) -> float:
 
 text
+
+### calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool = False, no_ballon_bck: bool = False):
+
+Calculates the graphs for alpha and eta and returns them in fig, ax objects.
+
+Args:
+    lamp1 (Lamp): First lamp.
+    lamp2 (Lamp): Second lamp.
+    D (float): Distance/diameter of the balloon.
+    pure_helium (bool, optional): Whether or not pure helium data should be used. Defaults to False.
+    no_ballon_bck (bool, optional): Whether or not no balloon was used in the incoming radiation. Defaults to False.
+
+Returns:
+    fig, ax: The figure with alpha and eta plotted onto it.
 
 ## plotter.py
 

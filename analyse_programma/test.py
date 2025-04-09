@@ -22,7 +22,6 @@ def load_data_file_Test():
                                     header_row_number=15,
                                     delimiter='\t',
                                     converter_needed=True)
-    print(spectro_data)
 
 
 def reformat_data_Test():
@@ -52,4 +51,4 @@ def lamp_plot_all_data_Test(lampnr: int):
 
 load_data_file_Test()
 lamp_file_load_Test()
-lamp_plot_all_data_Test(lampnr=4)
+lamp_plot_all_data_Test(lampnr=5)

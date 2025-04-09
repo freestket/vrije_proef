@@ -66,15 +66,23 @@ class Lamp():
                 if self.lamp_nr == 1:
                     begin = 62
                     end = 93
+                    file_amount = 31
                 elif self.lamp_nr == 2:
                     begin = 155
                     end = 186
+                    file_amount = 31
                 elif self.lamp_nr == 3:
                     begin = 248
                     end = 279
+                    file_amount = 31
                 elif self.lamp_nr == 4:
                     begin = 62
                     end = 93
+                    file_amount = 31
+                elif self.lamp_nr == 5:
+                    begin = 255
+                    end = 355
+                    file_amount = 100
                 else:
                     raise ValueError("Not a valid lamp number")
                 
@@ -82,16 +90,24 @@ class Lamp():
                 if self.lamp_nr == 1:
                     begin = 372
                     end = 403
+                    file_amount = 31
                 elif self.lamp_nr == 2:
                     begin = 434
                     end = 465
                     i_modifier = 31
+                    file_amount = 31
                 elif self.lamp_nr == 3:
                     begin = 341
                     end = 372
+                    file_amount = 31
                 elif self.lamp_nr == 4:
                     begin = 93
                     end = 124
+                    file_amount = 31
+                elif self.lamp_nr == 5:
+                    begin = 355
+                    end = 455
+                    file_amount = 100
                 else:
                     raise ValueError("Not a valid lamp number")
 
@@ -99,15 +115,23 @@ class Lamp():
                 if self.lamp_nr == 1:
                     begin = 93
                     end = 124
+                    file_amount = 31
                 elif self.lamp_nr == 2:
                     begin = 186
                     end = 217
+                    file_amount = 31
                 elif self.lamp_nr == 3:
                     begin = 279
                     end = 310
+                    file_amount = 31
                 elif self.lamp_nr == 4:
                     begin = 0
                     end = 31
+                    file_amount = 31
+                elif self.lamp_nr == 5:
+                    begin = 155
+                    end = 255
+                    file_amount = 100
                 else:
                     raise ValueError("Not a valid lamp number")
                 
@@ -115,15 +139,23 @@ class Lamp():
                 if self.lamp_nr == 1:
                     begin = 124
                     end = 155
+                    file_amount = 31
                 elif self.lamp_nr == 2:
                     begin = 217
                     end = 248
+                    file_amount = 31
                 elif self.lamp_nr == 3:
                     begin = 310
                     end = 341
+                    file_amount = 31
                 elif self.lamp_nr == 4:
                     begin = 124
                     end = 155
+                    file_amount = 31
+                elif self.lamp_nr == 5:
+                    begin = 455
+                    end = 555
+                    file_amount = 100
                 else:
                     raise ValueError("Not a valid lamp number")
             else:
@@ -133,7 +165,7 @@ class Lamp():
             #Gemiddelde van de 31 metingen bepalen
             avg_data = [[], []]
             avg_data_err = [None, []]
-            for i, j in zip(range(0, 31), range(begin, end)):
+            for i, j in zip(range(0, file_amount), range(begin, end)):
 
                 golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
                                             header_row_number=15,
@@ -151,11 +183,11 @@ class Lamp():
                         avg_data[1][k] += intens[k]
 
             for k in range(0, len(avg_data[1])):
-                avg_data[1][k] = avg_data[1][k]/31
+                avg_data[1][k] = avg_data[1][k]/file_amount
 
 
 
-            for i, j in zip(range(0, 31), range(begin, end)):
+            for i, j in zip(range(0, file_amount), range(begin, end)):
 
                 golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
                                             header_row_number=15,
@@ -170,7 +202,7 @@ class Lamp():
 
 
             for k in range(0, len(avg_data_err[1])):
-                avg_data_err[1][k] = 1.94*(avg_data_err[1][k]/(30))/(np.sqrt(31))
+                avg_data_err[1][k] = 1.94*(avg_data_err[1][k]/(file_amount-1))/(np.sqrt(file_amount))
 
             avg_data_err[0] = [0.005 for i in avg_data[0]]
 

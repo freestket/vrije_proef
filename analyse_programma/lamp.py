@@ -62,6 +62,7 @@ class Lamp():
 
             #Relevante waarden voor for loop instellen
             i_modifier = 0
+            subt = "Subt4"
             if dir_situation == "bck":
                 if self.lamp_nr == 1:
                     begin = 62
@@ -76,9 +77,10 @@ class Lamp():
                     end = 279
                     file_amount = 31
                 elif self.lamp_nr == 4:
-                    begin = 62
-                    end = 93
-                    file_amount = 31
+                    begin = 500
+                    end = 600
+                    file_amount = 100
+                    subt = "Subt2"
                 elif self.lamp_nr == 5:
                     begin = 255
                     end = 355
@@ -101,9 +103,10 @@ class Lamp():
                     end = 372
                     file_amount = 31
                 elif self.lamp_nr == 4:
-                    begin = 93
-                    end = 124
-                    file_amount = 31
+                    begin = 200
+                    end = 300
+                    file_amount = 100
+                    subt = "Subt2"
                 elif self.lamp_nr == 5:
                     begin = 355
                     end = 455
@@ -125,9 +128,10 @@ class Lamp():
                     end = 310
                     file_amount = 31
                 elif self.lamp_nr == 4:
-                    begin = 0
-                    end = 31
-                    file_amount = 31
+                    begin = 400
+                    end = 500
+                    file_amount = 100
+                    subt = "Subt2"
                 elif self.lamp_nr == 5:
                     begin = 155
                     end = 255
@@ -149,13 +153,15 @@ class Lamp():
                     end = 341
                     file_amount = 31
                 elif self.lamp_nr == 4:
-                    begin = 124
-                    end = 155
-                    file_amount = 31
-                elif self.lamp_nr == 5:
-                    begin = 455
-                    end = 555
+                    begin = 100
+                    end = 200
                     file_amount = 100
+                    subt = "Subt2"
+                elif self.lamp_nr == 5:
+                    begin = 0
+                    end = 100
+                    file_amount = 100
+                    subt = "Subt2"
                 else:
                     raise ValueError("Not a valid lamp number")
             else:
@@ -167,7 +173,7 @@ class Lamp():
             avg_data_err = [None, []]
             for i, j in zip(range(0, file_amount), range(begin, end)):
 
-                golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
+                golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_{subt}__{i+i_modifier}__{j}.txt",
                                             header_row_number=15,
                                             delimiter="\t",
                                             converter_needed=False)
@@ -189,7 +195,7 @@ class Lamp():
 
             for i, j in zip(range(0, file_amount), range(begin, end)):
 
-                golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
+                golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_{subt}__{i+i_modifier}__{j}.txt",
                                             header_row_number=15,
                                             delimiter="\t",
                                             converter_needed=False)

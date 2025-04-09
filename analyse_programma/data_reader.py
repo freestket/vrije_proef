@@ -32,7 +32,7 @@ def load_data_file(file_path: str, header_row_number: int = 0, delimiter: str = 
                           delimiter=delimiter,
                           skiprows=header_row_number,
                           unpack=True)
-
+    
     return golf, intens
 
 

@@ -136,6 +136,7 @@ def analytical_eta(I_1_in: float, I_1_out: float, I_2_in: float, I_2_out: float,
 
     eta = (I_1_in*I_2_out - I_1_out*I_2_in) * np.log( (I_1_in - I_2_in) / (I_1_out - I_2_out) ) / ( d*(I_1_in - I_1_out - I_2_in + I_2_out) )
 
+    
     eta_err = error_function(I_1_in, I_1_out, I_2_in, I_2_out, d, I_1_in_err, I_1_out_err, I_2_in_err, I_2_out_err, d_err)
 
     return eta, eta_err
@@ -209,14 +210,14 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool =
                                             D, 
                                             incoming_I_l1_err[i], outgoing_I_l1_err[i],
                                             incoming_I_l2_err[i], outgoing_I_l2_err[i],
-                                            0.5,
+                                            0.5e-2,
                                             alpha_error_func)
         eta, eta_err = analytical_eta(incoming_I_l1[i], outgoing_I_l1[i],
                                         incoming_I_l2[i], outgoing_I_l2[i],
                                         D, 
                                         incoming_I_l1_err[i], outgoing_I_l1_err[i],
                                         incoming_I_l2_err[i], outgoing_I_l2_err[i],
-                                        0.5,
+                                        0.5e-2,
                                         eta_error_func)
         alpha_nu.append(alpha)
         alpha_nu_err.append(alpha_err)
@@ -248,4 +249,4 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool =
 
     ax[1].legend()
 
-    return fig, ax
+    return fig, ax, golf, alpha_nu, alpha_nu_err, eta_nu, eta_nu_err

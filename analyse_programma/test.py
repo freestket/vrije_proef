@@ -45,6 +45,12 @@ def lamp_plot_all_data_Test(lampnr: int):
     fig, ax = lamp.plot_all_data()
     plt.show()
 
+def lamp4_dubbel_data():
+    lamp4  = Lamp(4, 6)
+    lamp4.load_in_data()
+    fig, ax = lamp4.plot_dubbel_data()
+    plt.show()
+
 
 
 
@@ -52,3 +58,4 @@ def lamp_plot_all_data_Test(lampnr: int):
 load_data_file_Test()
 lamp_file_load_Test()
 lamp_plot_all_data_Test(lampnr=4)
+lamp4_dubbel_data()

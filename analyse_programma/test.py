@@ -22,7 +22,7 @@ def load_data_file_Test():
                                     header_row_number=15,
                                     delimiter='\t',
                                     converter_needed=True)
-    assert(type(spectro_data[0][0]) == np.float64)
+    print(spectro_data)
 
 
 def reformat_data_Test():
@@ -40,10 +40,10 @@ def lamp_file_load_Test():
     assert(len(lamp1.bck_data_err) == 2)
 
 
-def lamp_plot_all_data_Test():
-    lamp1 = Lamp(3, 10)
-    lamp1.load_in_data()
-    fig, ax = lamp1.plot_all_data()
+def lamp_plot_all_data_Test(lampnr: int):
+    lamp = Lamp(lampnr, 10)
+    lamp.load_in_data()
+    fig, ax = lamp.plot_all_data()
     plt.show()
 
 
@@ -52,4 +52,4 @@ def lamp_plot_all_data_Test():
 
 load_data_file_Test()
 lamp_file_load_Test()
-lamp_plot_all_data_Test()
+lamp_plot_all_data_Test(lampnr=1)

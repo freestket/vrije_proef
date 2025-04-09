@@ -122,20 +122,20 @@ class Lamp():
             avg_data_err = [None, []]
             for i, j in zip(range(0, 31), range(begin, end)):
 
-                data = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
+                golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
                                             header_row_number=15,
                                             delimiter="\t",
                                             converter_needed=False)
-                for k in range(0, len(data)):
+                for k in range(0, len(intens)):
                     
                     if i == 0:
-                        avg_data[0].append(data[k][0])
-                        avg_data[1].append(data[k][1]) 
+                        avg_data[0].append(golf[k])
+                        avg_data[1].append(intens[k]) 
                     else:
-                        if avg_data[0][k] != data[k][0]:
+                        if avg_data[0][k] != golf[k]:
                             raise ValueError("Wavelengths do not correspond")
                         
-                        avg_data[1][k] += data[k][1]
+                        avg_data[1][k] += intens[k]
 
             for k in range(0, len(avg_data[1])):
                 avg_data[1][k] = avg_data[1][k]/31
@@ -144,16 +144,16 @@ class Lamp():
 
             for i, j in zip(range(0, 31), range(begin, end)):
 
-                data = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
+                golf, intens = DATA.load_data_file(f"./data/lamp_{self.lamp_nr}_{dir_situation}/lamp{self.lamp_nr}{dir_situation}_Subt4__{i+i_modifier}__{j}.txt",
                                             header_row_number=15,
                                             delimiter="\t",
                                             converter_needed=False)
                 
-                for k in range(0, len(data)):
+                for k in range(0, len(intens)):
                     if i == 0:
-                        avg_data_err[1].append((avg_data[1][k] - data[k][1])**2)
+                        avg_data_err[1].append((avg_data[1][k] - intens[k])**2)
                     else:
-                        avg_data_err[1][k] += (avg_data[1][k] - data[k][1])**2
+                        avg_data_err[1][k] += (avg_data[1][k] - intens[k])**2
 
 
             for k in range(0, len(avg_data_err[1])):

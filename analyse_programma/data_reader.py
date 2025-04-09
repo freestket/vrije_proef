@@ -4,10 +4,11 @@ This library contains functions to read the data files from the OceanView softwa
 
 TODO:
     Finish documentation in README
+    update documentation
 """
 
 
-def load_data_file(file_path: str, header_row_number: int = 0, delimiter: str = ",", converter_needed: bool = False) -> list:
+def load_data_file(file_path: str, header_row_number: int = 0, delimiter: str = ",", converter_needed: bool = False):
     """
     Loads one data file and returns the content as a matrix.
 
@@ -21,16 +22,18 @@ def load_data_file(file_path: str, header_row_number: int = 0, delimiter: str = 
         list: The raw data contained in a matrix.
     """
     if converter_needed == True:
-        data = np.loadtxt(file_path,
+        golf, intens = np.loadtxt(file_path,
                             delimiter=delimiter,
                             skiprows=header_row_number,
-                            converters=lambda s: s.replace(',', '.'))
+                            converters=lambda s: s.replace(',', '.'),
+                            unpack=True)
     else:
-        data = np.loadtxt(file_path,
+        golf, intens = np.loadtxt(file_path,
                           delimiter=delimiter,
-                          skiprows=header_row_number)
+                          skiprows=header_row_number,
+                          unpack=True)
 
-    return data
+    return golf, intens
 
 
 def reformat_data(data_matrix_lamp1: list, data_matrix_lamp2: list) -> list:

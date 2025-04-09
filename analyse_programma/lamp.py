@@ -21,9 +21,10 @@ class Lamp():
             ValueError: Lamp number is not 1, 2 or 3.
             ValueError: Voltage is negative.
         """
+        """
         if (lamp_nr < 1 or lamp_nr > 3) or (type(lamp_nr) != int):
             raise ValueError("lamp_nr has to be 1, 2 or 3")
-        
+        """
         if voltage < 0:
             raise ValueError("Voltage should be positive")
 
@@ -71,6 +72,9 @@ class Lamp():
                 elif self.lamp_nr == 3:
                     begin = 248
                     end = 279
+                elif self.lamp_nr == 4:
+                    begin = 62
+                    end = 93
                 else:
                     raise ValueError("Not a valid lamp number")
                 
@@ -85,6 +89,9 @@ class Lamp():
                 elif self.lamp_nr == 3:
                     begin = 341
                     end = 372
+                elif self.lamp_nr == 4:
+                    begin = 93
+                    end = 124
                 else:
                     raise ValueError("Not a valid lamp number")
 
@@ -98,6 +105,9 @@ class Lamp():
                 elif self.lamp_nr == 3:
                     begin = 279
                     end = 310
+                elif self.lamp_nr == 4:
+                    begin = 0
+                    end = 31
                 else:
                     raise ValueError("Not a valid lamp number")
                 
@@ -111,6 +121,9 @@ class Lamp():
                 elif self.lamp_nr == 3:
                     begin = 310
                     end = 341
+                elif self.lamp_nr == 4:
+                    begin = 124
+                    end = 155
                 else:
                     raise ValueError("Not a valid lamp number")
             else:

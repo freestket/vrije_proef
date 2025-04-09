@@ -52,4 +52,4 @@ def lamp_plot_all_data_Test(lampnr: int):
 
 load_data_file_Test()
 lamp_file_load_Test()
-lamp_plot_all_data_Test(lampnr=1)
+lamp_plot_all_data_Test(lampnr=4)

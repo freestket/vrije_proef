@@ -75,7 +75,7 @@ Deze grafiek kunnen we dan verder bespreken.
 
 # Software
 
-De software wordt opgedeeld in meerder bestand om een overzicht te houden.
+De software wordt opgedeeld in meerdere bestand om een overzicht te houden.
 
 ## main.py
 
@@ -117,7 +117,7 @@ Raises:
 Returns:
     list: The reformatted data. Structured as [wavelength, lamp_1, lamp_2] for each element.
 
-### seperate_data_lists(data: list) -> tuple:
+### seperate_data_lists(data: list) -> tuple: (Unused?)
 
 Splits de data van "reformat_data" in 3 lijsten: golflengtes, lamp 1 intesiteit, lamp 2 intensiteit.
 
@@ -136,7 +136,16 @@ Dit bestand berekend de waarden van $\alpha$ en $\eta$.
 
 ### general_transfer_solution(I_in, alpha, eta, d):
 
-text
+Gives the outgoing intensity from the general solution of the radiation transfer equation.
+
+Args:
+    I_in (_type_): Ingoing intensity.
+    alpha (_type_): Extinction coefficient.
+    eta (_type_): Emission coefficient.
+    d (_type_): Distance traveled by radiation.
+
+Returns:
+    _type_: Outgoing intensity.
 
 ### analytical_alpha_error():
 
@@ -174,7 +183,10 @@ Returns:
 
 ### analytical_eta(I_1_in: float, I_1_out: float, I_2_in: float, I_2_out: float, d: float) -> float:
 
-text
+Calculates the lambdified error function for eta.
+
+Returns:
+    callable: Error function for eta.
 
 ### calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool = False, no_ballon_bck: bool = False):
 
@@ -190,7 +202,7 @@ Args:
 Returns:
     fig, ax: The figure with alpha and eta plotted onto it.
 
-## plotter.py
+## plotter.py (Unused)
 
 Dit bestand maakt de grafieken aan voor $\alpha_\nu$ en $\eta_\nu$.
 
@@ -205,11 +217,10 @@ Deze bevat alle data voor een bepaalde lamp. Functies kunnen door gebruik van de
 Constructor.
 
 Args:
-    lamp_nr (int): The number of the lamp: 1, 2 or 3.
+    lamp_nr (int): The number of the lamp.
     voltage (int): Voltage the lamp was connected to.
 
 Raises:
-    ValueError: Lamp number is not 1, 2 or 3.
     ValueError: Voltage is negative.
 
 #### load_in_data(self):
@@ -247,6 +258,25 @@ Plot de data van alle situaties op één figuur.
 
 Returns:
     plt.fig, plt.ax: The figure and ax objects with all situations plotted.
+
+#### plot_dubbel_data(self):
+
+Plots the data of all situations where a double ballon was used and situations with a single balloon as reference.
+
+Returns:
+    plt.fig, plt.ax: The figure and ax objects with described situations plotted.
+
+### main.py
+
+Neergeschreven data van metingen wordt hier ingevuld.
+Het programma runt vervolgens de berekeningen uit vorige bestanden.
+De bepaalde grafieken worden dan geplot voor de ingegeven lampen.
+
+Met de bepaalde $\eta_{\nu}$ en $\alpha_{\nu}$ wordt de source functie $S_{\nu}$ bepaald en geplot.
+
+### test.py
+
+Wordt gebruikt tijdens het ontwikkelen van de software om functionaliteit te testen zonder te lang te moeten wachten op heel het programma om te runnen.
 
 # Voorbereiding
 

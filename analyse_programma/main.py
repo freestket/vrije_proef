@@ -19,6 +19,7 @@ D_lucht_2 = 24.7e-2
 D_dubbel = 56.8e-2
 D_dubbel_ballonnen = 51.5e-2
 
+#Initialiseren van Lamp objecten (verschillende metingen)
 lamp1 = Lamp(1, 10)
 lamp2 = Lamp(2, 5)
 lamp3 = Lamp(3, 12)
@@ -26,11 +27,13 @@ lamp4 = Lamp(4, 6)
 lamp5 = Lamp(5, 4)
 lamps = [lamp1, lamp2, lamp3, lamp4]
 
+#Effectieve analyse van de metingen
 fig, ax, alpha_nu, alpha_nu_err, eta_nu, eta_nu_err, golf = TRANSFER.calculate_alpha_eta(lamp4, lamp5, D_He_sterk_2, pure_helium=True, no_ballon_bck=False)
 
 plt.tight_layout()
 plt.show()
 
+#Plot de source function (eta_nu / alpha_nu)
 BB = []
 BB_err = []
 for i in range(0, len(alpha_nu)):

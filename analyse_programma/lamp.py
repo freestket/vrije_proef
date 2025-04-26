@@ -14,17 +14,13 @@ class Lamp():
         Lamp constructor.
 
         Args:
-            lamp_nr (int): The number of the lamp: 1, 2 or 3.
+            lamp_nr (int): The number of the lamp.
             voltage (int): Voltage the lamp was connected to.
 
         Raises:
-            ValueError: Lamp number is not 1, 2 or 3.
             ValueError: Voltage is negative.
         """
-        """
-        if (lamp_nr < 1 or lamp_nr > 3) or (type(lamp_nr) != int):
-            raise ValueError("lamp_nr has to be 1, 2 or 3")
-        """
+
         if voltage < 0:
             raise ValueError("Voltage should be positive")
 
@@ -414,6 +410,12 @@ class Lamp():
         return fig, ax
     
     def plot_dubbel_data(self):
+        """
+        Plots the data of all situations where a double ballon was used and situations with a single balloon as reference.
+
+        Returns:
+            plt.fig, plt.ax: The figure and ax objects with described situations plotted.
+        """
         situations = ["bck", "bck_noballon", "helium_zwak", "bck_dubbel", "bck_noballon_dubbel", "helium_zwak_dubbel"]
 
         fig, ax = plt.subplots(nrows=3, ncols=2)

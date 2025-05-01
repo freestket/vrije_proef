@@ -188,7 +188,7 @@ Calculates the lambdified error function for eta.
 Returns:
     callable: Error function for eta.
 
-### calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool = False, no_ballon_bck: bool = False):
+### calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_helium: bool = False, no_ballon_bck: bool = False):
 
 Calculates the graphs for alpha and eta and returns them in fig, ax objects.
 
@@ -196,6 +196,7 @@ Args:
     lamp1 (Lamp): First lamp.
     lamp2 (Lamp): Second lamp.
     D (float): Distance/diameter of the balloon.
+    d_err (float): Error on the distance of the balloon.
     pure_helium (bool, optional): Whether or not pure helium data should be used. Defaults to False.
     no_ballon_bck (bool, optional): Whether or not no balloon was used in the incoming radiation. Defaults to False.
 

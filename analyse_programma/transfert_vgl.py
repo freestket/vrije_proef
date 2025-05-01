@@ -142,7 +142,7 @@ def analytical_eta(I_1_in: float, I_1_out: float, I_2_in: float, I_2_out: float,
     return eta, eta_err
 
 
-def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool = False, no_ballon_bck: bool = False):
+def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_helium: bool = False, no_ballon_bck: bool = False):
     """
     Calculates the graphs for alpha and eta and returns them in fig, ax objects.
 
@@ -150,6 +150,7 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool =
         lamp1 (Lamp): First lamp.
         lamp2 (Lamp): Second lamp.
         D (float): Distance/diameter of the balloon.
+        d_err (float): Error on the distance of the balloon.
         pure_helium (bool, optional): Whether or not pure helium data should be used. Defaults to False.
         no_ballon_bck (bool, optional): Whether or not no balloon was used in the incoming radiation. Defaults to False.
 
@@ -210,14 +211,14 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, pure_helium: bool =
                                             D, 
                                             incoming_I_l1_err[i], outgoing_I_l1_err[i],
                                             incoming_I_l2_err[i], outgoing_I_l2_err[i],
-                                            0.5e-2,
+                                            d_err,
                                             alpha_error_func)
         eta, eta_err = analytical_eta(incoming_I_l1[i], outgoing_I_l1[i],
                                         incoming_I_l2[i], outgoing_I_l2[i],
                                         D, 
                                         incoming_I_l1_err[i], outgoing_I_l1_err[i],
                                         incoming_I_l2_err[i], outgoing_I_l2_err[i],
-                                        0.5e-2,
+                                        d_err,
                                         eta_error_func)
         alpha_nu.append(alpha)
         alpha_nu_err.append(alpha_err)

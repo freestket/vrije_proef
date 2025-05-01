@@ -170,6 +170,8 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
         incoming_I_l2 = lamp2.bck_noballon_data[1]
         incoming_I_l2_err = lamp2.bck_noballon_data_err[1]
 
+        ballon = "no balloon"
+
     else:
         golf_l1 = lamp1.bck_data[0]
         golf_l1_err = lamp1.bck_data_err[0]
@@ -180,6 +182,8 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
         incoming_I_l2 = lamp2.bck_data[1]
         incoming_I_l2_err = lamp2.bck_data_err[1]
 
+        ballon = "a balloon filled with air"
+
 
     if pure_helium:
         outgoing_I_l1 = lamp1.helium_sterk_data[1]
@@ -188,12 +192,16 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
         outgoing_I_l2 = lamp2.helium_sterk_data[1]
         outgoing_I_l2_err = lamp2.helium_sterk_data_err[1]
 
+        hel = "pure"
+
     else:
         outgoing_I_l1 = lamp1.helium_zwak_data[1]
         outgoing_I_l1_err = lamp1.helium_zwak_data_err[1]
 
         outgoing_I_l2 = lamp2.helium_zwak_data[1]
         outgoing_I_l2_err = lamp2.helium_zwak_data_err[1]
+
+        hel = "commercial"
 
 
 
@@ -249,5 +257,7 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
     ax[1].set_title("Emission coefficient")
 
     ax[1].legend()
+
+    fig.suptitle(f"Coëfficients for {hel} helium, using {ballon} in incoming radiation measurements", fontsize=16)
 
     return fig, ax, golf, alpha_nu, alpha_nu_err, eta_nu, eta_nu_err

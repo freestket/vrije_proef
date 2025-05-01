@@ -295,6 +295,12 @@ class Lamp():
         if not (situation in ["bck", "bck_noballon", "helium_zwak", "helium_sterk", "bck_dubbel", "bck_noballon_dubbel", "helium_zwak_dubbel"]):
             raise ValueError("Situation is not defined")
         
+        if self.lamp_nr == 4:
+            lamp_nr = 1
+        elif self.lamp_nr == 5:
+            lamp_nr = 2
+        else:
+            lamp_nr = self.lamp_nr
 
         match situation:
             case "bck":
@@ -304,7 +310,7 @@ class Lamp():
                 golf_err = self.bck_data_err[0]
                 intensity_err = self.bck_data_err[1]
 
-                title = "Incoming intensity, lamp " + str(self.lamp_nr) + " (With balloon)"
+                title = "Incoming intensity, lamp " + str(lamp_nr) + " (With balloon)"
 
             case "bck_noballon":
                 golf = self.bck_noballon_data[0]
@@ -313,7 +319,7 @@ class Lamp():
                 golf_err = self.bck_noballon_data_err[0]
                 intensity_err = self.bck_noballon_data_err[1]
 
-                title = "Incoming intensity, lamp " + str(self.lamp_nr) + " (Without balloon)"
+                title = "Incoming intensity, lamp " + str(lamp_nr) + " (Without balloon)"
 
             case "helium_zwak":
                 golf = self.helium_zwak_data[0]
@@ -322,7 +328,7 @@ class Lamp():
                 golf_err = self.helium_zwak_data_err[0]
                 intensity_err = self.helium_zwak_data_err[1]
 
-                title = "Outgoing intensity, lamp " + str(self.lamp_nr) + " (Commercial helium)"
+                title = "Outgoing intensity, lamp " + str(lamp_nr) + " (Commercial helium)"
 
             case "helium_sterk":
                 golf = self.helium_sterk_data[0]
@@ -331,7 +337,7 @@ class Lamp():
                 golf_err = self.helium_sterk_data_err[0]
                 intensity_err = self.helium_sterk_data_err[1]
 
-                title = "Outgoing intensity, lamp " + str(self.lamp_nr) + " (Pure helium)"
+                title = "Outgoing intensity, lamp " + str(lamp_nr) + " (Pure helium)"
 
             case "bck_dubbel":
                 golf = self.bck_dubbel_data[0]
@@ -340,7 +346,7 @@ class Lamp():
                 golf_err = self.bck_dubbel_data_err[0]
                 intensity_err = self.bck_dubbel_data_err[1]
 
-                title = "Incoming intensity, lamp " + str(self.lamp_nr) + " (With balloons, double balloons)"
+                title = "Incoming intensity, lamp " + str(lamp_nr) + " (With balloons, double balloons)"
 
             case "bck_noballon_dubbel":
                 golf = self.bck_noballon_dubbel_data[0]
@@ -349,7 +355,7 @@ class Lamp():
                 golf_err = self.bck_noballon_dubbel_data_err[0]
                 intensity_err = self.bck_noballon_dubbel_data_err[1]
 
-                title = "Incoming intensity, lamp " + str(self.lamp_nr) + " (Without balloon, double balloon distance)"
+                title = "Incoming intensity, lamp " + str(lamp_nr) + " (Without balloon, double balloon distance)"
 
             case "helium_zwak_dubbel":
                 golf = self.helium_zwak_dubbel_data[0]
@@ -358,7 +364,7 @@ class Lamp():
                 golf_err = self.helium_zwak_dubbel_data_err[0]
                 intensity_err = self.helium_zwak_dubbel_data_err[1]
 
-                title = "Outgoing intensity, lamp " + str(self.lamp_nr) + " (Commercial helium, double balloons)"
+                title = "Outgoing intensity, lamp " + str(lamp_nr) + " (Commercial helium, double balloons)"
 
 
         if fig == None and ax == None and pos1 == None and pos2 == None:

@@ -23,7 +23,7 @@ Charlotte Vincent, Free Staquet
 ## Idee
 
 In de transfertvergelijking\\
-$$\frac{dI_\nu}{ds} = \eta_\nu - \alpha_\nu I_\nu$$\\
+$$\frac{dI_\nu}{ds} = \eta_\nu - \alpha_\nu I_\nu$$
 komen twee golflengte-afhankelijke coëfficiënten voor.
 Om bijvoorbeeld een nevel te kunnen analyseren moeten deze coëfficiënten gekend zijn voor bepaalde gassen/stoffen. Daarom bepalen we deze dus voor een frequent voorkomend gas in de sterrenkunde: helium.
 

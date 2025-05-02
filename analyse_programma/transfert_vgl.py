@@ -274,30 +274,30 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
     golf = golf_l1
     golf_err = golf_l1_err
 
-    fig, ax = plt.subplots(nrows=1, ncols=2)
+    fig, ax = plt.subplots(nrows=1, ncols=2, dpi=180)
 
     ax[0].errorbar(golf, alpha_nu, yerr=alpha_nu_err, xerr=golf_err,
                             
-                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
-    ax[0].set_ylabel("$\\alpha_{\\nu}$")
-    ax[0].set_xlabel("Wavelength [nm]")
-    ax[0].set_title("Extinction coefficient")
+                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.8, capsize=1, capthick=0.3, elinewidth=0.3)
+    ax[0].set_ylabel("$\\alpha_{\\nu}$", fontsize=18)
+    ax[0].set_xlabel("Wavelength [nm]", fontsize=18)
+    ax[0].set_title("Extinction coefficient", fontsize=20)
 
     ax[0].legend()
 
     ax[1].errorbar(golf, eta_nu, yerr=eta_nu_err, xerr=golf_err,
                             
-                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
-    ax[1].set_ylabel("$\\eta_{\\nu}$")
-    ax[1].set_xlabel("Wavelength [nm]")
-    ax[1].set_title("Emission coefficient")
+                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.8, capsize=1, capthick=0.3, elinewidth=0.3)
+    ax[1].set_ylabel("$\\eta_{\\nu}$", fontsize=18)
+    ax[1].set_xlabel("Wavelength [nm]",fontsize=18)
+    ax[1].set_title("Emission coefficient", fontsize=20)
 
     ax[1].legend()
 
     if rel_bck_calc:
-        fig.suptitle(f"Coëfficients for {hel} helium", fontsize=16)
+        fig.suptitle(f"Coefficients for {hel} helium", fontsize=24)
 
     else:
-        fig.suptitle(f"Coëfficients for {hel} helium, using {ballon} in incoming radiation measurements", fontsize=16)
+        fig.suptitle(f"Coefficients for {hel} helium, using {ballon} in incoming radiation measurements", fontsize=24)
 
     return fig, ax, golf, alpha_nu, alpha_nu_err, eta_nu, eta_nu_err

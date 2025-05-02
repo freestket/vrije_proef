@@ -462,7 +462,7 @@ class Lamp():
             lamp1_helium_err = self.helium_sterk_data_err
 
         else:
-            lamp1_helium = self.helium_zwak_data
+            lamp1_helium = self.helium_zwak_data    
             lamp1_helium_err = self.helium_zwak_data_err
 
 
@@ -472,8 +472,8 @@ class Lamp():
         relative_intensity_bck = []
         relative_intensity_bck_err = []
         for i in range(0, len(rel_bck[1])):
-            relative_intensity_bck.append(-lamp1_bck[1][i] + rel_bck[1][i])
-            relative_intensity_bck_err.append(STAT.foutpropagatie_som(-1, 1, lamp1_bck_err[1][i], rel_bck_err[1][i]))
+            relative_intensity_bck.append(np.abs(lamp1_bck[1][i] - rel_bck[1][i]))
+            relative_intensity_bck_err.append(STAT.foutpropagatie_som(1, 1, lamp1_bck_err[1][i], rel_bck_err[1][i]))
 
         relative_intensity = []
         relative_intensity_err = []
@@ -482,8 +482,8 @@ class Lamp():
                 relative_intensity.append(lamp1_helium[1][i] - rel_bck[1][i])
                 relative_intensity_err.append(STAT.foutpropagatie_som(1, -1, lamp1_helium_err[1][i], rel_bck_err[1][i]))
             else:
-                relative_intensity.append(-lamp1_helium[1][i] + rel_bck[1][i])
-                relative_intensity_err.append(STAT.foutpropagatie_som(-1, 1, lamp1_helium_err[1][i], rel_bck_err[1][i]))
+                relative_intensity.append(np.abs(lamp1_helium[1][i] - rel_bck[1][i]))
+                relative_intensity_err.append(STAT.foutpropagatie_som(1, 1, lamp1_helium_err[1][i], rel_bck_err[1][i]))
 
 
         
@@ -555,7 +555,7 @@ class Lamp():
         self.make_relative_spectrums(True)
         self.make_relative_spectrums(False)
 
-        fig1, ax1 = plt.subplots(ncols=1, nrows=3, dpi=190)
+        fig1, ax1 = plt.subplots(ncols=1, nrows=3, dpi=220)
 
         helium_rel_data = self.helium_sterk_rel_data
         helium_rel_data_err = self.helium_sterk_rel_data_err

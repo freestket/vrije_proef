@@ -12,7 +12,16 @@ lamp2.load_in_data()
 
 
 def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize, titsize):
+    """
+    Plots the relative spectra of a lamp.
 
+    Args:
+        lamp (Lamp): Lamp to plot data for.
+        helium (bool): Whether helium measurements will be plotted.
+        pure (bool): Whether pure or commercial helium will be plotted.
+        fsize (int): Fontsize for labels.
+        titsize (int): Title size for plots.
+    """
     lamp.make_relative_spectrums(True)
     lamp.make_relative_spectrums(False)
 

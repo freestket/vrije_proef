@@ -450,6 +450,12 @@ class Lamp():
 
 
     def make_relative_spectrums(self, pure_helium: bool):
+        """
+        Makes the data lists for the lamp spectra, taking into account the air-filed balloon and lamp.
+
+        Args:
+            pure_helium (bool): Whether or not pure or commercial helium is used.
+        """
 
         rel_bck = self.bck_noballon_data
         rel_bck_err = self.bck_noballon_data_err
@@ -510,6 +516,15 @@ class Lamp():
 
 
     def plot_relative_spectra(self, pure_helium: bool = True):
+        """
+        Plots all the relative spectra for a lamp.
+
+        Args:
+            pure_helium (bool, optional): Whether or not pure helium should be used. Defaults to True.
+
+        Returns:
+            plt.fig, plt.ax: Fig and ax objects with spectra plotted onto them.
+        """
         
         self.make_relative_spectrums(pure_helium)
 
@@ -551,6 +566,12 @@ class Lamp():
     
     
     def plot_all_relative_spectra(self):
+        """
+        Plots all the relative spectra of a lamp.
+
+        Returns:
+            plt.fig, plt.ax: Fig and ax objects with all relative spectral data plotted onto them.
+        """
 
         self.make_relative_spectrums(True)
         self.make_relative_spectrums(False)

@@ -1,6 +1,4 @@
 import data_reader as DATA
-import transfert_vgl as TRANSFER
-import plotter as PLOT
 
 import numpy as np
 from lamp import Lamp

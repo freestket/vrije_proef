@@ -22,7 +22,7 @@ Charlotte Vincent, Free Staquet
 
 ## Idee
 
-In de transfertvergelijking\\
+In de transfertvergelijking
 $$\frac{dI_\nu}{ds} = \eta_\nu - \alpha_\nu I_\nu$$
 komen twee golflengte-afhankelijke coëfficiënten voor.
 Om bijvoorbeeld een nevel te kunnen analyseren moeten deze coëfficiënten gekend zijn voor bepaalde gassen/stoffen. Daarom bepalen we deze dus voor een frequent voorkomend gas in de sterrenkunde: helium.
@@ -33,13 +33,13 @@ Om bijvoorbeeld een nevel te kunnen analyseren moeten deze coëfficiënten geken
 
 Voor de opstelling gebruiken we liefst een verduisterde ruimte, maar de software (OceanView) laat ook toe om een achtergrondspectrum in te stellen.
 Er wordt een ballon opgehangen die gevuld is met helium. De ballon wordt genoeg gevuld zodat de wanden verdunnen.
-Achter de ballon wordt een lamp geplaats die genoeg gefocuseerd is om alleen de ballon te beschijnen. Deze lamp wordt verbonden met een spanningsbron van 12
+Achter de ballon wordt een lamp geplaats die genoeg gefocuseerd is om alleen de ballon te beschijnen. Deze lamp wordt verbonden met een spanningsbron van 12 V.
 Aan de andere kant van de ballon, tegenover de lamp wordt een digitale spectrometer geplaatst en verbonden met een computer.
 Langs de randen van de ballon wordt deze met zwarte doeken zo goed als mogelijk afgeschermd om de achtergrondstraling verder te beperken.
 
 #### Metingen
 
-De lamp wordt voor eerst aangesloten op een spanningsbron van 12 V.
+De lamp wordt eerst aangesloten op een spanningsbron van 12 V.
 
 ##### Achtergrondspectrum
 
@@ -64,11 +64,11 @@ Voor de analyse mogelijk te maken moet de bovenstaande procedure nog eens herhaa
 
 De bekomen data wordt telkens geanalyseerd per golflengte.
 Op elke golflengte wordt het volgende stelsel opgelost:
-
-
+$$I_1^{out} = I_1^{in} e^{-\alpha D} + \frac{\eta}{\alpha}(1 - e^{-\alpha D}) \\
+I_2^{out} = I_2^{in} e^{-\alpha D} + \frac{\eta}{\alpha}(1 - e^{-\alpha D})$$
 De coëfficienten $\alpha$ en $\eta$ kunnen dan berekend worden met de volgende uitdrukkingen:
-
-
+$$\alpha = \frac{\log{(\frac{I_1^{in} - I_2^{in}}{I_1^{out} - I_2^{out}})}}{D} \\
+\eta = \frac{(I_1^{in}I_2^{out} - I_1^{out}I_2^{in})\log{(\frac{I_1^{in} - I_2^{in}}{I_1^{out} - I_2^{out}})}}{D(I_1^{in} - I_1^{out} - I_2^{in} + I_2^{out})}$$
 Deze berekening wordt herhaald op alle gemeten golflengtes.
 Met deze waarden kan dan een grafiek geplot worden van $\alpha_\nu$ en $\eta_\nu$ voor helium.
 Deze grafiek kunnen we dan verder bespreken.

@@ -55,6 +55,7 @@ def lamp_rel_spectrum_plot(lampnr: int):
     lamp = Lamp(lampnr, 6)
     lamp.load_in_data()
     fig, ax = lamp.plot_all_relative_spectra()
+    plt.tight_layout()
     plt.show()
 
 
@@ -65,4 +66,4 @@ load_data_file_Test()
 lamp_file_load_Test()
 #lamp_plot_all_data_Test(lampnr=4)
 #lamp4_dubbel_data()
-lamp_rel_spectrum_plot(lampnr=4)
+lamp_rel_spectrum_plot(lampnr=5)

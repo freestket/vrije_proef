@@ -142,7 +142,7 @@ def analytical_eta(I_1_in: float, I_1_out: float, I_2_in: float, I_2_out: float,
     return eta, eta_err
 
 
-def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_helium: bool = False, no_ballon_bck: bool = False):
+def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_helium: bool = False, rel_bck_calc: bool = False, no_ballon_bck: bool = False):
     """
     Calculates the graphs for alpha and eta and returns them in fig, ax objects.
 
@@ -159,49 +159,85 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
     """
     lamp1.load_in_data()
     lamp2.load_in_data()
+    lamp1.make_relative_spectrums(True)
+    lamp1.make_relative_spectrums(False)
+    lamp2.make_relative_spectrums(True)
+    lamp2.make_relative_spectrums(False)
 
-    if no_ballon_bck:
-        golf_l1 = lamp1.bck_noballon_data[0]
-        golf_l1_err = lamp1.bck_noballon_data_err[0]
+    if rel_bck_calc:
 
-        incoming_I_l1 = lamp1.bck_noballon_data[1]
-        incoming_I_l1_err = lamp1.bck_noballon_data_err[1]
+        golf_l1 = lamp1.rel_bck_data[0]
+        golf_l1_err = lamp1.rel_bck_data_err[0]
 
-        incoming_I_l2 = lamp2.bck_noballon_data[1]
-        incoming_I_l2_err = lamp2.bck_noballon_data_err[1]
+        incoming_I_l1 = lamp1.rel_bck_data[1]
+        incoming_I_l1_err = lamp1.rel_bck_data_err[1]
 
-        ballon = "no balloon"
+        incoming_I_l2 = lamp2.rel_bck_data[1]
+        incoming_I_l2_err = lamp2.rel_bck_data_err[1]
 
+        if pure_helium:
+            outgoing_I_l1 = lamp1.helium_sterk_rel_data[1]
+            outgoing_I_l1_err = lamp1.helium_sterk_rel_data_err[1]
+
+            outgoing_I_l2 = lamp2.helium_sterk_rel_data[1]
+            outgoing_I_l2_err = lamp2.helium_sterk_rel_data_err[1]
+
+            hel = "pure"
+
+        else:
+            outgoing_I_l1 = lamp1.helium_zwak_rel_data[1]
+            outgoing_I_l1_err = lamp1.helium_zwak_rel_data_err[1]
+
+            outgoing_I_l2 = lamp2.helium_zwak_rel_data[1]
+            outgoing_I_l2_err = lamp2.helium_zwak_rel_data_err[1]
+
+            hel = "commercial"
+        
     else:
-        golf_l1 = lamp1.bck_data[0]
-        golf_l1_err = lamp1.bck_data_err[0]
 
-        incoming_I_l1 = lamp1.bck_data[1]
-        incoming_I_l1_err = lamp1.bck_data_err[1]
+        if no_ballon_bck:
+            golf_l1 = lamp1.bck_noballon_data[0]
+            golf_l1_err = lamp1.bck_noballon_data_err[0]
 
-        incoming_I_l2 = lamp2.bck_data[1]
-        incoming_I_l2_err = lamp2.bck_data_err[1]
+            incoming_I_l1 = lamp1.bck_noballon_data[1]
+            incoming_I_l1_err = lamp1.bck_noballon_data_err[1]
 
-        ballon = "a balloon filled with air"
+            incoming_I_l2 = lamp2.bck_noballon_data[1]
+            incoming_I_l2_err = lamp2.bck_noballon_data_err[1]
+
+            ballon = "no balloon"
+
+        else:
+            golf_l1 = lamp1.bck_data[0]
+            golf_l1_err = lamp1.bck_data_err[0]
+
+            incoming_I_l1 = lamp1.bck_data[1]
+            incoming_I_l1_err = lamp1.bck_data_err[1]
+
+            incoming_I_l2 = lamp2.bck_data[1]
+            incoming_I_l2_err = lamp2.bck_data_err[1]
+
+            ballon = "a balloon filled with air"
 
 
-    if pure_helium:
-        outgoing_I_l1 = lamp1.helium_sterk_data[1]
-        outgoing_I_l1_err = lamp1.helium_sterk_data_err[1]
+        if pure_helium:
+            outgoing_I_l1 = lamp1.helium_sterk_data[1]
+            outgoing_I_l1_err = lamp1.helium_sterk_data_err[1]
 
-        outgoing_I_l2 = lamp2.helium_sterk_data[1]
-        outgoing_I_l2_err = lamp2.helium_sterk_data_err[1]
+            outgoing_I_l2 = lamp2.helium_sterk_data[1]
+            outgoing_I_l2_err = lamp2.helium_sterk_data_err[1]
 
-        hel = "pure"
+            hel = "pure"
 
-    else:
-        outgoing_I_l1 = lamp1.helium_zwak_data[1]
-        outgoing_I_l1_err = lamp1.helium_zwak_data_err[1]
+        else:
+            outgoing_I_l1 = lamp1.helium_zwak_data[1]
+            outgoing_I_l1_err = lamp1.helium_zwak_data_err[1]
 
-        outgoing_I_l2 = lamp2.helium_zwak_data[1]
-        outgoing_I_l2_err = lamp2.helium_zwak_data_err[1]
+            outgoing_I_l2 = lamp2.helium_zwak_data[1]
+            outgoing_I_l2_err = lamp2.helium_zwak_data_err[1]
 
-        hel = "commercial"
+            hel = "commercial"
+        
 
 
 
@@ -258,6 +294,10 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
 
     ax[1].legend()
 
-    fig.suptitle(f"Coëfficients for {hel} helium, using {ballon} in incoming radiation measurements", fontsize=16)
+    if rel_bck_calc:
+        fig.suptitle(f"Coëfficients for {hel} helium", fontsize=16)
+
+    else:
+        fig.suptitle(f"Coëfficients for {hel} helium, using {ballon} in incoming radiation measurements", fontsize=16)
 
     return fig, ax, golf, alpha_nu, alpha_nu_err, eta_nu, eta_nu_err

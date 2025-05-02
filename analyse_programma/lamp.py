@@ -451,11 +451,11 @@ class Lamp():
 
     def make_relative_spectrums(self, pure_helium: bool):
 
-        rel_bck = self.bck_data
-        rel_bck_err = self.bck_data_err
+        rel_bck = self.bck_noballon_data
+        rel_bck_err = self.bck_noballon_data_err
 
-        lamp1_bck = self.bck_noballon_data
-        lamp1_bck_err = self.bck_noballon_data_err
+        lamp1_bck = self.bck_data
+        lamp1_bck_err = self.bck_data_err
 
         if pure_helium:
             lamp1_helium = self.helium_sterk_data
@@ -467,32 +467,46 @@ class Lamp():
 
 
         golf = lamp1_bck[0]
+        golf_err = lamp1_bck_err[0]
 
         relative_intensity_bck = []
         relative_intensity_bck_err = []
         for i in range(0, len(rel_bck[1])):
-            relative_intensity_bck.append(lamp1_bck[1][i] - rel_bck[1][i])
-            relative_intensity_bck_err.append(STAT.foutpropagatie_som(1, -1, lamp1_bck_err[1][i], rel_bck_err[1][i]))
+            relative_intensity_bck.append(-lamp1_bck[1][i] + rel_bck[1][i])
+            relative_intensity_bck_err.append(STAT.foutpropagatie_som(-1, 1, lamp1_bck_err[1][i], rel_bck_err[1][i]))
 
         relative_intensity = []
         relative_intensity_err = []
         for i in range(0, len(rel_bck[1])):
-            relative_intensity.append(lamp1_helium[1][i] - rel_bck[1][i])
-            relative_intensity_err.append(STAT.foutpropagatie_som(1, -1, lamp1_helium_err[1][i], rel_bck_err[1][i]))
+            if False: #self.lamp_nr == 4 and pure_helium:
+                relative_intensity.append(lamp1_helium[1][i] - rel_bck[1][i])
+                relative_intensity_err.append(STAT.foutpropagatie_som(1, -1, lamp1_helium_err[1][i], rel_bck_err[1][i]))
+            else:
+                relative_intensity.append(-lamp1_helium[1][i] + rel_bck[1][i])
+                relative_intensity_err.append(STAT.foutpropagatie_som(-1, 1, lamp1_helium_err[1][i], rel_bck_err[1][i]))
 
 
         
 
-        self.rel_bck_data = [golf, relative_intensity_bck]
-        self.rel_bck_data_err = [golf, relative_intensity_bck_err]
+        self.rel_bck_data.append(golf) 
+        self.rel_bck_data.append(relative_intensity_bck)
+ 
+        self.rel_bck_data_err.append(golf_err)
+        self.rel_bck_data_err.append(relative_intensity_bck_err)
 
         if pure_helium:
-            self.helium_sterk_rel_data = [golf, relative_intensity]
-            self.helium_sterk_rel_data_err = [golf, relative_intensity_err]
+            self.helium_sterk_rel_data.append(golf)
+            self.helium_sterk_rel_data.append(relative_intensity)
+
+            self.helium_sterk_rel_data_err.append(golf)
+            self.helium_sterk_rel_data_err.append(relative_intensity_err)
 
         else:
-            self.helium_zwak_rel_data = [golf, relative_intensity]
-            self.helium_zwak_rel_data_err = [golf, relative_intensity_err]
+            self.helium_zwak_rel_data.append(golf)
+            self.helium_zwak_rel_data.append(relative_intensity)
+
+            self.helium_zwak_rel_data_err.append(golf)
+            self.helium_zwak_rel_data_err.append(relative_intensity_err)
 
 
     def plot_relative_spectra(self, pure_helium: bool = True):
@@ -541,7 +555,7 @@ class Lamp():
         self.make_relative_spectrums(True)
         self.make_relative_spectrums(False)
 
-        fig1, ax1 = plt.subplots(ncols=1, nrows=3)
+        fig1, ax1 = plt.subplots(ncols=1, nrows=3, dpi=190)
 
         helium_rel_data = self.helium_sterk_rel_data
         helium_rel_data_err = self.helium_sterk_rel_data_err
@@ -549,21 +563,21 @@ class Lamp():
 
         ax1[0].errorbar(self.rel_bck_data[0], self.rel_bck_data[1], yerr=self.rel_bck_data_err[1],
                                 
-                        label="Spectrum", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
+                        label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.8, capsize=1, capthick=0.3, elinewidth=0.3)
 
         ax1[0].set_ylabel("$I$ [counts]")
         ax1[0].set_xlabel("Wavelength [nm]")
-        ax1[0].set_title("Spectrum: Incoming radiation")
+        ax1[0].set_title("Incoming radiation")
         ax1[0].legend()
 
 
         ax1[1].errorbar(helium_rel_data[0], helium_rel_data[1], yerr=helium_rel_data_err[1],
                                 
-                        label="Spectrum", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
+                        label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.8, capsize=1, capthick=0.3, elinewidth=0.3)
 
         ax1[1].set_ylabel("$I$ [counts]")
         ax1[1].set_xlabel("Wavelength [nm]")
-        ax1[1].set_title("Spectrum: outgoing radiation (Pure helium)")
+        ax1[1].set_title("Outgoing radiation through pure helium")
         ax1[1].legend()
 
 
@@ -573,13 +587,16 @@ class Lamp():
 
         ax1[2].errorbar(helium_rel_data[0], helium_rel_data[1], yerr=helium_rel_data_err[1],
                                 
-                        label="Spectrum", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
+                        label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.8, capsize=1, capthick=0.3, elinewidth=0.3)
 
         ax1[2].set_ylabel("$I$ [counts]")
         ax1[2].set_xlabel("Wavelength [nm]")
-        ax1[2].set_title("Spectrum: outgoing radiation (Commercial helium)")
+        ax1[2].set_title("Outgoing radiation through commercial helium")
         ax1[2].legend()
 
-        fig1.suptitle(f"Lamp {self.lamp_nr}", fontsize=16)
+        if self.lamp_nr == 4 or self.lamp_nr == 5:
+            lampnr = self.lamp_nr - 3
+
+        fig1.suptitle(f"Lamp {lampnr}", fontsize=14)
 
         return fig1, ax1

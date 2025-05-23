@@ -11,7 +11,7 @@ lamp1.load_in_data()
 lamp2.load_in_data()
 
 
-def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize, titsize):
+def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize: int, titsize: int, labelsize: int, alpha: float):
     """
     Plots the relative spectra of a lamp.
 
@@ -21,6 +21,8 @@ def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize, titsi
         pure (bool): Whether pure or commercial helium will be plotted.
         fsize (int): Fontsize for labels.
         titsize (int): Title size for plots.
+        labelsize (int): Size of the ticks and the axes.
+        alpha (float): How transparent the errorbars are.
     """
     lamp.make_relative_spectrums(True)
     lamp.make_relative_spectrums(False)
@@ -35,9 +37,12 @@ def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize, titsi
             helium_rel_data = lamp.helium_sterk_rel_data
             helium_rel_data_err = lamp.helium_sterk_rel_data_err
 
+            for label in (ax1.get_xticklabels() + ax1.get_yticklabels()):
+                label.set_fontsize(labelsize)
+
             ax1.errorbar(helium_rel_data[0], helium_rel_data[1], yerr=helium_rel_data_err[1],
                                     
-                    label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
+                    label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.6, capsize=1, capthick=0.5, elinewidth=0.5, alpha=alpha)
 
             ax1.set_ylabel("$I$ [counts]", fontsize=fsize)
             ax1.set_xlabel("Wavelength [nm]", fontsize=fsize)
@@ -48,10 +53,12 @@ def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize, titsi
             helium_rel_data = lamp.helium_zwak_rel_data
             helium_rel_data_err = lamp.helium_zwak_rel_data_err
 
+            for label in (ax1.get_xticklabels() + ax1.get_yticklabels()):
+                label.set_fontsize(labelsize)
 
             ax1.errorbar(helium_rel_data[0], helium_rel_data[1], yerr=helium_rel_data_err[1],
                                     
-                    label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
+                    label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.6, capsize=1, capthick=0.5, elinewidth=0.5, alpha=alpha)
 
             ax1.set_ylabel("$I$ [counts]", fontsize=fsize)
             ax1.set_xlabel("Wavelength [nm]", fontsize=fsize)
@@ -59,9 +66,12 @@ def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize, titsi
             ax1.legend()
     else:
 
+        for label in (ax1.get_xticklabels() + ax1.get_yticklabels()):
+                label.set_fontsize(labelsize)
+
         ax1.errorbar(lamp.rel_bck_data[0], lamp.rel_bck_data[1], yerr=lamp.rel_bck_data_err[1],
                                 
-                    label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=1, capsize=1.5, capthick=0.5, elinewidth=0.5)
+                    label="Data", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.6, capsize=1, capthick=0.5, elinewidth=0.5, alpha=alpha)
 
         ax1.set_ylabel("$I$ [counts]", fontsize=fsize)
         ax1.set_xlabel("Wavelength [nm]", fontsize=fsize)
@@ -74,10 +84,12 @@ def plot_all_relative_spectra(lamp: Lamp, helium: bool, pure: bool, fsize, titsi
 
 fsize = 24
 titsize = 28
+labelsize = 20
+alpha = 0.5
 
-plot_all_relative_spectra(lamp1, helium=False, pure=False, fsize=fsize, titsize=titsize)
-plot_all_relative_spectra(lamp1, helium=True, pure=False, fsize=fsize, titsize=titsize)
-plot_all_relative_spectra(lamp1, helium=True, pure=True, fsize=fsize, titsize=titsize)
-plot_all_relative_spectra(lamp2, helium=False, pure=False, fsize=fsize, titsize=titsize)
-plot_all_relative_spectra(lamp2, helium=True, pure=False, fsize=fsize, titsize=titsize)
-plot_all_relative_spectra(lamp2, helium=True, pure=True, fsize=fsize, titsize=titsize)
+plot_all_relative_spectra(lamp1, helium=False, pure=False, fsize=fsize, titsize=titsize, labelsize=labelsize, alpha=alpha)
+plot_all_relative_spectra(lamp1, helium=True, pure=False, fsize=fsize, titsize=titsize, labelsize=labelsize, alpha=alpha)
+plot_all_relative_spectra(lamp1, helium=True, pure=True, fsize=fsize, titsize=titsize, labelsize=labelsize, alpha=alpha)
+plot_all_relative_spectra(lamp2, helium=False, pure=False, fsize=fsize, titsize=titsize, labelsize=labelsize, alpha=alpha)
+plot_all_relative_spectra(lamp2, helium=True, pure=False, fsize=fsize, titsize=titsize, labelsize=labelsize, alpha=alpha)
+plot_all_relative_spectra(lamp2, helium=True, pure=True, fsize=fsize, titsize=titsize, labelsize=labelsize, alpha=alpha)

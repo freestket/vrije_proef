@@ -276,18 +276,29 @@ def calculate_alpha_eta(lamp1 : Lamp, lamp2: Lamp, D: float, d_err: float, pure_
 
     fig, ax = plt.subplots(nrows=1, ncols=2, dpi=180)
 
+    labelsize = 16
+
+    for label in (ax[0].get_xticklabels() + ax[0].get_yticklabels()):
+                label.set_fontsize(labelsize)
+
     ax[0].errorbar(golf, alpha_nu, yerr=alpha_nu_err, xerr=golf_err,
                             
-                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.8, capsize=1, capthick=0.3, elinewidth=0.3)
+                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.7, capsize=1, capthick=0.3, elinewidth=0.3, alpha=0.5)
     ax[0].set_ylabel("$\\alpha_{\\nu}$", fontsize=18)
     ax[0].set_xlabel("Wavelength [nm]", fontsize=18)
     ax[0].set_title("Extinction coefficient", fontsize=20)
 
+    if pure_helium:
+        ax[0].set_ylim(-2, 9)
+
     ax[0].legend()
+
+    for label in (ax[1].get_xticklabels() + ax[1].get_yticklabels()):
+                label.set_fontsize(labelsize)
 
     ax[1].errorbar(golf, eta_nu, yerr=eta_nu_err, xerr=golf_err,
                             
-                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.8, capsize=1, capthick=0.3, elinewidth=0.3)
+                    label="Calculations", fmt=" ", marker="o", color="black", ecolor="black", markersize=0.7, capsize=1, capthick=0.3, elinewidth=0.3, alpha=0.5)
     ax[1].set_ylabel("$\\eta_{\\nu}$", fontsize=18)
     ax[1].set_xlabel("Wavelength [nm]",fontsize=18)
     ax[1].set_title("Emission coefficient", fontsize=20)

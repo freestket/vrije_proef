@@ -62,6 +62,6 @@ def lamp_rel_spectrum_plot(lampnr: int):
 
 load_data_file_Test()
 lamp_file_load_Test()
-#lamp_plot_all_data_Test(lampnr=4)
+lamp_plot_all_data_Test(lampnr=4)
 #lamp4_dubbel_data()
-lamp_rel_spectrum_plot(lampnr=4)
+#lamp_rel_spectrum_plot(lampnr=4)

@@ -30,7 +30,7 @@ lamp5 = Lamp(5, 4)
 
 #Effectieve analyse van de metingen
 fig, ax, alpha_nu, alpha_nu_err, eta_nu, eta_nu_err, golf = TRANSFER.calculate_alpha_eta(lamp4, lamp5, D_He_sterk_2, d_err, 
-                                                                                         pure_helium=False, rel_bck_calc=True, no_ballon_bck=False)
+                                                                                         pure_helium=True, rel_bck_calc=True, no_ballon_bck=False)
 
 plt.tight_layout()
 plt.show()
